@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+    music-player-api:
+        container_name: "music-player-api-container"
+        image: music-player-api-image
+        build: 
+            context: ./src
+            dockerfile: ./
+        ports:
+            - "5000:5000"
+        environment:
+            ASPNETCORE_URLS: "https://*:5000"
+            ASPNETCORE_ENVIRONMENT: "Development"
+        links:
+            - music-player-database
+
+    music-player-database:
+        container_name: "music-player-database-container"
+        image: music-player-database-image
+        build: ./database
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: "MyVeryStrongPassword1!"
+            ACCEPT_EULA: "Y"

@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Api",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceRoot}/src/Api/bin/Debug/netcoreapp2.1/MusicPlayer.Api.dll",
+        "args": [],
+        "cwd": "${workspaceRoot}/src",
+        "stopAtEntry": false,
+        "launchBrowser": {
+          "enabled": false
+        },
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Debug"
+        }
+      },
+      {
+        "name": ".NET Attach",
+        "type": "coreclr",
+        "request": "attach",
+        "processId": "${command:pickProcess}"
+      }
+    ]
+  }
+  
