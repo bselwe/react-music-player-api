@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:latest
+FROM microsoft/dotnet:2.1.300-sdk
 RUN mkdir /app
 COPY . /app
 WORKDIR /app/Api
