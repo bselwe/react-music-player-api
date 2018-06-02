@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 
 namespace MusicPlayer.Core.Models
 {
     public class Track
     {
+        public Guid UserId { get; private set; }
         public int Id { get; private set; }
         public string Title { get; private set; }
         public string Artist { get; private set; }
@@ -12,7 +12,7 @@ namespace MusicPlayer.Core.Models
 
         private Track() { }
 
-        public static Track Create(int id, string title, string artist, string photo)
+        public static Track Create(Guid userId, int id, string title, string artist, string photo)
         {
             return new Track
             {
