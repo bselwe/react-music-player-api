@@ -8,4 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="../Core/MusicPlayer.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="2.2.0" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+  </ItemGroup>
 </Project>

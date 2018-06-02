@@ -1,12 +1,24 @@
-﻿using System;
+﻿using System.Net;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace MusicPlayer.Api
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private const int Port = 5000;
+
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(cfg => cfg.Listen(IPAddress.Any, Port))
+                .UseIISIntegration()
+                .UseUrls($"https://*:{Port}")
+                .UseStartup<Startup>()
+                .Build();
     }
 }
