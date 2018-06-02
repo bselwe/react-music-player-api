@@ -5,6 +5,7 @@ using IdentityServer4.Models;
 namespace MusicPlayer.Api
 {
     using MusicPlayer.Core.Auth;
+    using MusicPlayer.Core.Contracts;
     using static IdentityServer4.IdentityServerConstants;
 
     static class ISConfiguration

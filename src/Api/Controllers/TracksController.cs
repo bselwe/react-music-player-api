@@ -1,6 +1,4 @@
-
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -9,7 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusicPlayer.Core.Auth;
 using MusicPlayer.Core.Contracts;
-using MusicPlayer.Core.Repositories;
+using MusicPlayer.Core.Models;
+using MusicPlayer.Core.Services;
 
 namespace MusicPlayer.Api.Controllers
 {
@@ -17,11 +16,30 @@ namespace MusicPlayer.Api.Controllers
     [Route("api/[controller]")]
     public class TracksController : Controller
     {
-        private readonly ITracksRepository tracksRepository;
+        private readonly ITracksService tracksService;
 
-        public TracksController(ITracksRepository tracksRepository)
+        public TracksController(ITracksService tracksService)
         {
-            this.tracksRepository = tracksRepository;
+            this.tracksService = tracksService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFavourite([FromBody] NewFavouriteTrackDTO track)
+        {
+            if (track == null)
+                return BadRequest();
+
+            var userId = Guid.Parse(User.FindFirstValue(KnownClaims.UserId));
+            
+            await tracksService.CreateAsync(
+                userId,
+                track.Id,
+                track.Title,
+                track.Artist,
+                track.Photo
+            );
+
+            return new StatusCodeResult((int) HttpStatusCode.Created);
         }
 
         [HttpGet]
@@ -31,7 +49,7 @@ namespace MusicPlayer.Api.Controllers
             if (userId == null)
                 return NotFound();
 
-            var tracks = await tracksRepository.AllFavouritesAsync(userId);
+            var tracks = await tracksService.AllFavouritesAsync(userId);
             var mappedTracks = tracks.Select(t => new TrackDTO
             {
                 Id = t.Id,

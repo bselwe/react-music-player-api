@@ -1,4 +1,4 @@
-namespace MusicPlayer.Core.Auth
+namespace MusicPlayer.Core.Contracts
 {
     public static class AuthConsts
     {

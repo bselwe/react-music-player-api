@@ -9,6 +9,7 @@ namespace MusicPlayer.Core.Repositories
 {
     public interface ITracksRepository
     {
+        void AddFavourite(Track track);
         Task<List<Track>> AllFavouritesAsync(Guid userId);
     }
 
@@ -19,6 +20,11 @@ namespace MusicPlayer.Core.Repositories
         public TracksRepository(CoreDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+        
+        public void AddFavourite(Track track)
+        {
+            dbContext.Tracks.Add(track);
         }
 
         public Task<List<Track>> AllFavouritesAsync(Guid userId)

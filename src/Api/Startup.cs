@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 using MusicPlayer.Core;
 using MusicPlayer.Core.Auth;
 using MusicPlayer.Core.Repositories;
+using MusicPlayer.Core.Services;
 using Newtonsoft.Json.Serialization;
 
 namespace MusicPlayer.Api
@@ -58,6 +59,8 @@ namespace MusicPlayer.Api
 
             services.AddTransient<CoreUnitOfWork, CoreUnitOfWork>();
             services.AddScoped<ITracksRepository, TracksRepository>();
+            services.AddScoped<ITracksService, TracksService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             ConfigureIdentityServer(services);
             ConfigureAuthentication(services);
