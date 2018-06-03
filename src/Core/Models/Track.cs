@@ -16,6 +16,7 @@ namespace MusicPlayer.Core.Models
         {
             return new Track
             {
+                UserId = userId,
                 Id = id,
                 Title = title,
                 Artist = artist,

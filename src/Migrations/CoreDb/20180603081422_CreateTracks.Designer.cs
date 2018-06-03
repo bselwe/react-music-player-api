@@ -10,7 +10,7 @@ using MusicPlayer.Core;
 namespace MusicPlayer.Migrations.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20180602225534_CreateTracks")]
+    [Migration("20180603081422_CreateTracks")]
     partial class CreateTracks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -188,9 +188,9 @@ namespace MusicPlayer.Migrations.Migrations
 
             modelBuilder.Entity("MusicPlayer.Core.Models.Track", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("UserId");
+
+                    b.Property<int>("Id");
 
                     b.Property<string>("Artist");
 
@@ -198,9 +198,7 @@ namespace MusicPlayer.Migrations.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "Id");
 
                     b.ToTable("Tracks");
                 });

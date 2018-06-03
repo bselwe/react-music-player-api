@@ -110,6 +110,7 @@ namespace MusicPlayer.Api
                 .AddJwtBearer(options =>
                 {
                     options.Authority = Configuration["AppBase"];
+                    options.MetadataAddress = "http://localhost:5000/.well-known/openid-configuration";
                     options.TokenValidationParameters.ValidateAudience = false;
                     options.TokenValidationParameters.ValidateIssuer = false;
                     

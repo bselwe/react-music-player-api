@@ -33,7 +33,8 @@ namespace MusicPlayer.Api.Controllers
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                Email = user.Email
             };
 
             return Ok(userInfo);

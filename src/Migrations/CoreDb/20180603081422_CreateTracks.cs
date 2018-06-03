@@ -60,15 +60,14 @@ namespace MusicPlayer.Migrations.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Artist = table.Column<string>(nullable: true),
                     Photo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tracks", x => x.Id);
+                    table.PrimaryKey("PK_Tracks", x => new { x.UserId, x.Id });
                 });
 
             migrationBuilder.CreateTable(

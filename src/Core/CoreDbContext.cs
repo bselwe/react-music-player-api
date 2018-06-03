@@ -25,7 +25,7 @@ namespace MusicPlayer.Core
 
             builder.Entity<Track>(cfg =>
             {
-                cfg.HasKey(e => e.Id);
+                cfg.HasKey(t => new { t.UserId, t.Id });
             });
 
             builder.Entity<AuthUser>(b => b.ToTable("AspNetUsers"));
