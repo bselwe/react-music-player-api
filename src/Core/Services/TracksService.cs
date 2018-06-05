@@ -11,6 +11,7 @@ namespace MusicPlayer.Core.Services
     {
         Task CreateAsync(Guid userId, int id, string title, string artist, string photo);
         Task<List<Track>> AllFavouritesAsync(Guid userId);
+        Task<bool> IsTrackFavouriteAsync(Guid userId, int trackId);
     }
 
     public class TracksService : ITracksService
@@ -36,6 +37,12 @@ namespace MusicPlayer.Core.Services
         public Task<List<Track>> AllFavouritesAsync(Guid userId)
         {
             return tracksRepository.AllFavouritesAsync(userId);
+        }
+
+        public async Task<bool> IsTrackFavouriteAsync(Guid userId, int trackId)
+        {
+            var track = await tracksRepository.FindAsync(userId, trackId);
+            return track != null;
         }
     }
 }

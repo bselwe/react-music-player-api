@@ -42,6 +42,14 @@ namespace MusicPlayer.Api.Controllers
             return new StatusCodeResult((int) HttpStatusCode.Created);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> IsFavourite(int id)
+        {
+            var userId = Guid.Parse(User.FindFirstValue(KnownClaims.UserId));
+            var result = await tracksService.IsTrackFavouriteAsync(userId, id);
+            return Ok(new IsFavouriteTrackDTO() { Id = id, IsFavourite = result });
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetFavourites()
         {
