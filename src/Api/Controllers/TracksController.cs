@@ -24,14 +24,14 @@ namespace MusicPlayer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFavourite([FromBody] NewFavouriteTrackDTO track)
+        public async Task<IActionResult> AddFavourite([FromBody] AddFavouriteTrackDTO track)
         {
             if (track == null)
                 return BadRequest();
 
             var userId = Guid.Parse(User.FindFirstValue(KnownClaims.UserId));
             
-            await tracksService.CreateAsync(
+            await tracksService.AddAsync(
                 userId,
                 track.Id,
                 track.Title,
@@ -40,6 +40,20 @@ namespace MusicPlayer.Api.Controllers
             );
 
             return new StatusCodeResult((int) HttpStatusCode.Created);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveFavourite([FromBody] RemoveFavouriteTrackDTO track)
+        {
+            if (track == null)
+                return BadRequest();
+
+            var userId = Guid.Parse(User.FindFirstValue(KnownClaims.UserId));
+            var result = await tracksService.RemoveAsync(userId, track.Id);
+            
+            if (!result)
+                return NotFound();
+            return Ok();
         }
 
         [HttpGet("{id}")]

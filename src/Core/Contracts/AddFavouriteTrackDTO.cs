@@ -1,6 +1,6 @@
 namespace MusicPlayer.Core.Contracts
 {
-    public class NewFavouriteTrackDTO
+    public class AddFavouriteTrackDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }

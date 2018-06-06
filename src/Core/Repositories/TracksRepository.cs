@@ -10,6 +10,7 @@ namespace MusicPlayer.Core.Repositories
     public interface ITracksRepository
     {
         void AddFavourite(Track track);
+        void RemoveFavourite(Track track);
         Task<List<Track>> AllFavouritesAsync(Guid userId);
         Task<Track> FindAsync(Guid userId, int trackId);
     }
@@ -26,6 +27,11 @@ namespace MusicPlayer.Core.Repositories
         public void AddFavourite(Track track)
         {
             dbContext.Tracks.Add(track);
+        }
+
+        public void RemoveFavourite(Track track)
+        {
+            dbContext.Tracks.Remove(track);
         }
 
         public Task<List<Track>> AllFavouritesAsync(Guid userId)
